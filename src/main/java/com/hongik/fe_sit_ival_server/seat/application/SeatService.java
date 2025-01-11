@@ -22,7 +22,8 @@ public class SeatService {
     public List<GetAllSeatInfoResponse> findAllByTeam(Long teamId) {
         List<Seat> seats = seatRepository.findAllByTeam(teamId);
         return seats.stream().map(
-                seat -> new GetAllSeatInfoResponse(seat.getTeam().getId(), seat.getTeam().getName())
+                seat -> new GetAllSeatInfoResponse(seat.getId(), seat.getTeam().getName(),
+                        seat.getHorizon(), seat.getVertical(), seat.getIsBooked())
         ).toList();
     }
 
