@@ -9,10 +9,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class Team {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,10 +28,32 @@ public class Team {
     @JoinColumn(name = "festival_id")
     private Festival festival;
 
-    @OneToMany(mappedBy = "team")
-    private List<Seat> seats = new ArrayList<>();
-
     private String name;
-    private String headCount;
+
+    private Integer headCount;
+
     private String address;
+
+    @Builder(access = AccessLevel.PRIVATE)
+    private Team(Festival festival, String name, Integer headCount, String address) {
+        this.festival = festival;
+        this.name = name;
+        this.headCount = headCount;
+        this.address = address;
+    }
+
+    public static Team createTeam(Festival festival, String name, Integer headCount, String address) {
+        return Team.builder()
+                .festival(festival)
+                .name(name)
+                .headCount(headCount)
+                .address(address)
+                .build();
+    }
+
+    public void updateTeamInfo(String name, Integer headCount, String address) {
+        this.name = name;
+        this.headCount = headCount;
+        this.address = address;
+    }
 }
