@@ -25,6 +25,6 @@ public class Seat {
     private Festival festival;
 
     private Integer row;
-    private Integer column;
+    private Integer col;
     private Boolean available;
 }
