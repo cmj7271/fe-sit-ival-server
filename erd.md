@@ -1,9 +1,10 @@
 ```mermaid
     erDiagram
-    FESTIVAL_MEMBER }o--o| FESTIVAL : ""
-    MEMBER |o--o{ FESTIVAL_MEMBER : "" 
-    MEMBER |o--|| SEAT : ""
-    FESTIVAL |o--o{ SEAT : ""
+    FESTIVAL_MEMBER }o--|| FESTIVAL : ""
+    MEMBER ||--o{ FESTIVAL_MEMBER : "" 
+    MEMBER ||--o| SEAT : ""
+    FESTIVAL |o--|{ SEAT : ""
+    FESTIVAL ||--o{ PARTITION : ""
     
     FESTIVAL {
         int id PK
