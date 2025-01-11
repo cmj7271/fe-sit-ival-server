@@ -14,8 +14,17 @@ import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class Festival {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,13 +39,12 @@ public class Festival {
     @OneToMany(mappedBy = "festival")
     private List<Team> teams;
 
+    private String name;
     private String location;
     @Lob
     private String description;
     private Integer seatHorizon;
     private Integer seatVertical;
-    private LocalDateTime recruitBegin;
-    private LocalDateTime recruitEnd;
     private LocalDateTime begin;
     private LocalDateTime end;
 }
