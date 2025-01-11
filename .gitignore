@@ -25,6 +25,8 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+/src/main/generated/
+/src/test/generated_tests/
 
 ### NetBeans ###
 /nbproject/private/
@@ -35,3 +37,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Mac OS ###
+.DS_Store
+
+### Secrets ###
+.env
