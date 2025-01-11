@@ -11,7 +11,8 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class FestivalMember {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

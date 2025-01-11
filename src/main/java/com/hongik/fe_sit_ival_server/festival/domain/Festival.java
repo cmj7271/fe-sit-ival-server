@@ -14,7 +14,8 @@ import java.util.List;
 
 @Entity
 public class Festival {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(mappedBy = "festival")
