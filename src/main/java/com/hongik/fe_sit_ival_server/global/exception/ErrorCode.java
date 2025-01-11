@@ -10,6 +10,7 @@ import lombok.Getter;
 public enum ErrorCode {
     // 400 BAD_REQUEST
     METHOD_ARGUMENT_NOT_VALID(HttpStatus.BAD_REQUEST, "유효하지 않은 인자입니다."),
+    METHOD_ILLEGAL_ACCESS(HttpStatus.BAD_REQUEST, "잘못된 접근입니다."),
 
     // 401 UNAUTHORIZED
     UNAUTHORIZED_DOMAIN(HttpStatus.UNAUTHORIZED, "이 도메인에 접근할 권한이 없습니다."),
