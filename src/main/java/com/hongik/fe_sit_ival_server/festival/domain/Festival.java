@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,4 +35,8 @@ public class Festival {
     private String description;
     private Integer seatHorizon;
     private Integer seatVertical;
+    private LocalDateTime recruitBegin;
+    private LocalDateTime recruitEnd;
+    private LocalDateTime begin;
+    private LocalDateTime end;
 }
