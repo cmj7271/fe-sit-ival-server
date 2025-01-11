@@ -1,8 +1,6 @@
 package com.hongik.fe_sit_ival_server.festival.controller;
 
 import com.hongik.fe_sit_ival_server.festival.dto.AddFestivalRequest;
-import com.hongik.fe_sit_ival_server.festival.dto.FestivalSizeDTO;
-import com.hongik.fe_sit_ival_server.festival.dto.FestivalWithoutSizeDTO;
 import com.hongik.fe_sit_ival_server.festival.application.FestivalService;
 import com.hongik.fe_sit_ival_server.festival.dto.FindFestivalResponse;
 import java.util.List;
