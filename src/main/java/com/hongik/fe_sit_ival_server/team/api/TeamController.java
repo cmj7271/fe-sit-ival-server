@@ -31,7 +31,7 @@ public class TeamController {
         return ResponseEntity.ok(teamService.updateTeamInfo(teamId, request));
     }
 
-    @PatchMapping("/{teamId}")
+    @DeleteMapping("/{teamId}")
     public ResponseEntity<Void> deleteTeam(@PathVariable Long teamId) {
         teamService.deleteTeam(teamId);
         return ResponseEntity.ok().build();
