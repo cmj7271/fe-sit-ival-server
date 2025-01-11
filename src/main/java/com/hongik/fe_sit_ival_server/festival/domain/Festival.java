@@ -45,6 +45,6 @@ public class Festival {
     private String description;
     private Integer seatHorizon;
     private Integer seatVertical;
-    private LocalDateTime festivalBegin;
-    private LocalDateTime festivalEnd;
+    private LocalDateTime begin;
+    private LocalDateTime end;
 }

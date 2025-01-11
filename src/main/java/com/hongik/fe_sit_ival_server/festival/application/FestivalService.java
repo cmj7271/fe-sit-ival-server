@@ -28,8 +28,8 @@ public class FestivalService {
         Festival festival = Festival.builder()
                 .name(festivalDTO.name())
                 .organizer(festivalDTO.organizer())
-                .festivalBegin(festivalDTO.begin())
-                .festivalEnd(festivalDTO.end())
+                .begin(festivalDTO.begin())
+                .end(festivalDTO.end())
                 .location(festivalDTO.location())
                 .description(festivalDTO.description())
                 .build();
@@ -58,8 +58,8 @@ public class FestivalService {
         Festival updatedFestival = Festival.builder()
                 .name(festival.getName())
                 .organizer(festival.getOrganizer())
-                .festivalBegin(festival.getFestivalBegin())
-                .festivalEnd(festival.getFestivalEnd())
+                .begin(festival.getBegin())
+                .end(festival.getEnd())
                 .location(festival.getLocation())
                 .description(festival.getDescription())
                 .id(festival.getId())
@@ -77,8 +77,8 @@ public class FestivalService {
                 festival.getId(),
                 festival.getName(),
                 festival.getOrganizer(),
-                festival.getFestivalBegin(),
-                festival.getFestivalEnd(),
+                festival.getBegin(),
+                festival.getEnd(),
                 festival.getLocation(),
                 festival.getDescription()
         );
@@ -87,8 +87,8 @@ public class FestivalService {
         return Festival.builder()
                 .name(festivalDTO.name())
                 .organizer(festivalDTO.organizer())
-                .festivalBegin(festivalDTO.begin())
-                .festivalEnd(festivalDTO.end())
+                .begin(festivalDTO.begin())
+                .end(festivalDTO.end())
                 .location(festivalDTO.location())
                 .description(festivalDTO.description())
                 .id(festival.getId())
