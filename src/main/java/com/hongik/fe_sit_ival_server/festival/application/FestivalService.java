@@ -6,6 +6,7 @@ import com.hongik.fe_sit_ival_server.festival.dto.FestivalWithoutSizeDTO;
 import com.hongik.fe_sit_ival_server.festival.dao.FestivalRepository;
 import com.hongik.fe_sit_ival_server.festival.domain.Festival;
 import com.hongik.fe_sit_ival_server.festival.dto.FindFestivalResponse;
+import com.hongik.fe_sit_ival_server.festival.dto.FindOneResponse;
 import com.hongik.fe_sit_ival_server.organizer.dao.OrganizerRepository;
 import com.hongik.fe_sit_ival_server.organizer.domain.Organizer;
 import java.util.List;
@@ -25,9 +26,16 @@ public class FestivalService {
         return festivalRepository.findAll().stream()
                 .map(this::festivalToDTO).toList();
     }
-    public FindFestivalResponse findById(Long id) throws IllegalArgumentException {
+    public FindOneResponse findById(Long id) throws IllegalArgumentException {
         Festival festival = festivalRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        return festivalToDTO(festival);
+        return new FindOneResponse(
+                festival.getName(),
+                festival.getOrganizer().getName(),
+                festival.getFestivalBegin(),
+                festival.getFestivalEnd(),
+                festival.getLocation(),
+                festival.getDescription()
+        );
     }
 
     public Long createFestival(AddFestivalRequest festivalDTO) {

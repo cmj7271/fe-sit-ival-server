@@ -3,6 +3,7 @@ package com.hongik.fe_sit_ival_server.festival.controller;
 import com.hongik.fe_sit_ival_server.festival.dto.AddFestivalRequest;
 import com.hongik.fe_sit_ival_server.festival.application.FestivalService;
 import com.hongik.fe_sit_ival_server.festival.dto.FindFestivalResponse;
+import com.hongik.fe_sit_ival_server.festival.dto.FindOneResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,12 @@ public class FestivalController {
         return new ResponseEntity<>(all, HttpStatus.OK);
     }
 
+    @GetMapping("/festival/{id}")
+    public ResponseEntity<FindOneResponse> findFestival(@PathVariable Long id) {
+        FindOneResponse festival = festivalService.findById(id);
+        return new ResponseEntity<>(festival, HttpStatus.OK);
+    }
+
     @PostMapping("festival")
     public ResponseEntity<Long> addFestival(@RequestBody AddFestivalRequest addFestivalRequest) {
         Long id = festivalService.createFestival(addFestivalRequest);
@@ -35,17 +42,15 @@ public class FestivalController {
     }
 
     @PatchMapping("/festival/{id}")
-    public ResponseEntity<Long> updateFestival(@PathVariable String id,
+    public ResponseEntity<Long> updateFestival(@PathVariable Long id,
                                                @RequestBody AddFestivalRequest addFestivalRequest) {
-        Long parsedId = Long.parseLong(id);
-        Long updatedId = festivalService.updateFestival(parsedId, addFestivalRequest);
+        Long updatedId = festivalService.updateFestival(id, addFestivalRequest);
         return new ResponseEntity<>(updatedId, HttpStatus.OK);
     }
 
     @DeleteMapping("/festival/{id}")
-    public ResponseEntity<Void> deleteFestival(@PathVariable String id) {
-        Long parsedId = Long.parseLong(id);
-        festivalService.deleteFestival(parsedId);
+    public ResponseEntity<Void> deleteFestival(@PathVariable Long id) {
+        festivalService.deleteFestival(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
