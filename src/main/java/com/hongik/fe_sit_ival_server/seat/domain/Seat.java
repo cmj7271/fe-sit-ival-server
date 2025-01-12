@@ -16,9 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +33,27 @@ public class Seat {
     private Long horizon;
     private Long vertical;
     private Boolean isBooked = false;
+
+    @Builder(access = AccessLevel.PRIVATE)
+    private Seat(Festival festival, Team team, Long horizon, Long vertical, Boolean isBooked) {
+        this.festival = festival;
+        this.team = team;
+        this.horizon = horizon;
+        this.vertical = vertical;
+        this.isBooked = isBooked;
+    }
+
+    public static Seat createSeat(Festival festival, Team team, Long horizon, Long vertical) {
+        return Seat.builder()
+                .festival(festival)
+                .team(team)
+                .horizon(horizon)
+                .vertical(vertical)
+                .isBooked(false)
+                .build();
+    }
+
+    public void updateBooked(Boolean isBooked) {
+        this.isBooked = isBooked;
+    }
 }
