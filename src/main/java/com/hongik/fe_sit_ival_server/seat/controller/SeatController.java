@@ -21,8 +21,8 @@ public class SeatController {
     final SeatService seatService;
 
     @PostMapping("{id}/seat")
-    public ResponseEntity<Void> bookSeat(@PathVariable("id") Long festivalId,
-                                         @RequestBody BookSeatRequest bookSeatRequest) {
+    public ResponseEntity<Void> bookSeat(
+            @PathVariable("id") Long festivalId, @RequestBody BookSeatRequest bookSeatRequest) {
         try {
             seatService.bookSeat(festivalId, bookSeatRequest.teamId(), bookSeatRequest.coordinates());
         } catch (IllegalStateException e) {

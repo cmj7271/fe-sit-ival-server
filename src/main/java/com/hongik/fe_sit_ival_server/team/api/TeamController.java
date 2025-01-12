@@ -4,7 +4,6 @@ import com.hongik.fe_sit_ival_server.team.application.TeamService;
 import com.hongik.fe_sit_ival_server.team.dto.request.TeamCreateRequest;
 import com.hongik.fe_sit_ival_server.team.dto.request.TeamUpdateRequest;
 import com.hongik.fe_sit_ival_server.team.dto.response.TeamFindResponse;
-import com.hongik.fe_sit_ival_server.team.dto.response.TeamSeatFindResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +36,8 @@ public class TeamController {
         return ResponseEntity.ok().build();
     }
 
-//    @GetMapping("/{teamId}/seat")
-//    public ResponseEntity<TeamSeatFindResponse> findTeamSeat(@PathVariable Long teamId) {
-//        return ResponseEntity.ok(teamService.findTeamSeat(teamId));
-//    }
+    //    @GetMapping("/{teamId}/seat")
+    //    public ResponseEntity<TeamSeatFindResponse> findTeamSeat(@PathVariable Long teamId) {
+    //        return ResponseEntity.ok(teamService.findTeamSeat(teamId));
+    //    }
 }

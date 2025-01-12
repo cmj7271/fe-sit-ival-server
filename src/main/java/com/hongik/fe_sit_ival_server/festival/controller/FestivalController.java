@@ -1,7 +1,7 @@
 package com.hongik.fe_sit_ival_server.festival.controller;
 
-import com.hongik.fe_sit_ival_server.festival.dto.AddFestivalRequest;
 import com.hongik.fe_sit_ival_server.festival.application.FestivalService;
+import com.hongik.fe_sit_ival_server.festival.dto.AddFestivalRequest;
 import com.hongik.fe_sit_ival_server.festival.dto.FindFestivalResponse;
 import com.hongik.fe_sit_ival_server.festival.dto.FindOneResponse;
 import java.util.List;
@@ -42,8 +42,8 @@ public class FestivalController {
     }
 
     @PatchMapping("/festival/{id}")
-    public ResponseEntity<Long> updateFestival(@PathVariable Long id,
-                                               @RequestBody AddFestivalRequest addFestivalRequest) {
+    public ResponseEntity<Long> updateFestival(
+            @PathVariable Long id, @RequestBody AddFestivalRequest addFestivalRequest) {
         Long updatedId = festivalService.updateFestival(id, addFestivalRequest);
         return new ResponseEntity<>(updatedId, HttpStatus.OK);
     }
@@ -54,18 +54,18 @@ public class FestivalController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @GetMapping("/festival/{id}/size")
-//    public ResponseEntity<FestivalSizeDTO> findFestivalSize(@PathVariable String id) {
-//        Long parsedId = Long.parseLong(id);
-//        FestivalSizeDTO dto = festivalService.findFestivalSizeDTO(parsedId);
-//        return new ResponseEntity<>(dto, HttpStatus.OK);
-//    }
-//
-//    @PostMapping("/festival/{id}/size")
-//    public ResponseEntity<Long> updateFestivalSize(@PathVariable String id,
-//                                                   @RequestBody FestivalSizeDTO festivalSizeDTO) {
-//        Long parsedId = Long.parseLong(id);
-//        Long updatedId = festivalService.setFestivalSize(parsedId, festivalSizeDTO);
-//        return new ResponseEntity<>(updatedId, HttpStatus.OK);
-//    }
+    //    @GetMapping("/festival/{id}/size")
+    //    public ResponseEntity<FestivalSizeDTO> findFestivalSize(@PathVariable String id) {
+    //        Long parsedId = Long.parseLong(id);
+    //        FestivalSizeDTO dto = festivalService.findFestivalSizeDTO(parsedId);
+    //        return new ResponseEntity<>(dto, HttpStatus.OK);
+    //    }
+    //
+    //    @PostMapping("/festival/{id}/size")
+    //    public ResponseEntity<Long> updateFestivalSize(@PathVariable String id,
+    //                                                   @RequestBody FestivalSizeDTO festivalSizeDTO) {
+    //        Long parsedId = Long.parseLong(id);
+    //        Long updatedId = festivalService.setFestivalSize(parsedId, festivalSizeDTO);
+    //        return new ResponseEntity<>(updatedId, HttpStatus.OK);
+    //    }
 }

@@ -30,6 +30,5 @@ public class InitDb {
             Organizer admin = Organizer.createMockOrganizer();
             em.persist(admin);
         }
-
     }
 }

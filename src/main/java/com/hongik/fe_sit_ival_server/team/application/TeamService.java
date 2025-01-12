@@ -7,7 +7,6 @@ import com.hongik.fe_sit_ival_server.team.domain.Team;
 import com.hongik.fe_sit_ival_server.team.dto.request.TeamCreateRequest;
 import com.hongik.fe_sit_ival_server.team.dto.request.TeamUpdateRequest;
 import com.hongik.fe_sit_ival_server.team.dto.response.TeamFindResponse;
-import com.hongik.fe_sit_ival_server.team.dto.response.TeamSeatFindResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,8 @@ public class TeamService {
     private final TeamRepository teamRepository;
 
     public Long createTeam(TeamCreateRequest request) {
-        Festival festival = festivalRepository.findById(request.festivalId())
+        Festival festival = festivalRepository
+                .findById(request.festivalId())
                 .orElseThrow(() -> new RuntimeException("customException"));
 
         Team team = Team.createTeam(festival, request.name(), request.headCount(), request.address());
@@ -31,15 +31,13 @@ public class TeamService {
     }
 
     public TeamFindResponse findTeam(Long teamId) {
-        Team team = teamRepository.findById(teamId)
-                .orElseThrow(() -> new RuntimeException("customException"));
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new RuntimeException("customException"));
 
         return TeamFindResponse.from(team);
     }
 
     public Long updateTeamInfo(Long teamId, TeamUpdateRequest request) {
-        Team team = teamRepository.findById(teamId)
-                .orElseThrow(() -> new RuntimeException("customException"));
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new RuntimeException("customException"));
 
         team.updateTeamInfo(request.name(), request.headCount(), request.address());
 
@@ -47,14 +45,13 @@ public class TeamService {
     }
 
     public void deleteTeam(Long teamId) {
-        Team team = teamRepository.findById(teamId)
-                .orElseThrow(() -> new RuntimeException("customException"));
+        Team team = teamRepository.findById(teamId).orElseThrow(() -> new RuntimeException("customException"));
 
         teamRepository.delete(team);
     }
 
-//    public TeamSeatFindResponse findTeamSeat(Long teamId) {
-//        Team team = teamRepository.findById(teamId)
-//                .orElseThrow(() -> new RuntimeException("customException"));
-//    }
+    //    public TeamSeatFindResponse findTeamSeat(Long teamId) {
+    //        Team team = teamRepository.findById(teamId)
+    //                .orElseThrow(() -> new RuntimeException("customException"));
+    //    }
 }

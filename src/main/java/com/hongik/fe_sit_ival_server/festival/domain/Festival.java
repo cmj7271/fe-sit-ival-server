@@ -26,7 +26,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Festival {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -41,8 +42,10 @@ public class Festival {
 
     private String name;
     private String location;
+
     @Lob
     private String description;
+
     private Integer seatHorizon;
     private Integer seatVertical;
     private LocalDateTime festivalBegin;
