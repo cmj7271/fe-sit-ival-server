@@ -5,10 +5,12 @@ import com.hongik.fe_sit_ival_server.festival.domain.Festival;
 import com.hongik.fe_sit_ival_server.seat.dao.SeatRepository;
 import com.hongik.fe_sit_ival_server.seat.domain.Seat;
 import com.hongik.fe_sit_ival_server.seat.dto.Coordinate;
-import com.hongik.fe_sit_ival_server.seat.dto.GetAllSeatInfoResponse;
+import com.hongik.fe_sit_ival_server.seat.dto.SeatFindResponse;
 import com.hongik.fe_sit_ival_server.team.dao.TeamRepository;
 import com.hongik.fe_sit_ival_server.team.domain.Team;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +21,11 @@ public class SeatService {
     final TeamRepository teamRepository;
     final FestivalRepository festivalRepository;
 
-    public List<GetAllSeatInfoResponse> findAllByTeam(Long teamId) {
-        List<Seat> seats = seatRepository.findAllByTeam(teamId);
-        return seats.stream().map(
-                seat -> new GetAllSeatInfoResponse(seat.getId(), seat.getTeam().getName(),
-                        seat.getHorizon(), seat.getVertical(), seat.getIsBooked())
-        ).toList();
+    public List<SeatFindResponse> findAllByTeam(Long festivalId) {
+        List<Seat> seats = seatRepository.findByFestivalIdAndIsBookedTrue(festivalId);
+        return seats.stream()
+                .map(SeatFindResponse::from)
+                .collect(Collectors.toList());
     }
 
     public void bookSeat(Long festivalId,Long teamId, List<Coordinate> coordinates) throws IllegalArgumentException {
@@ -34,23 +35,15 @@ public class SeatService {
         coordinates.forEach(coordinate -> {
             List<Seat> seats = seatRepository.findAllByHorizonAndVertical(coordinate.horizon(),
                     coordinate.vertical());
-            if(seats.size() != 1) {
-                throw new IllegalArgumentException("해당하는 좌석이 1개가 아닙니다.");
+            if(!seats.isEmpty()) {
+                Seat seat = seats.getFirst();
+                if (seat.getIsBooked()) {
+                    throw new IllegalArgumentException("이미 예약된 좌석입니다.");
+                }
             }
-            Seat seat = seats.getFirst();
-            if(seat.getIsBooked()) {
-                throw new IllegalArgumentException("이미 예약된 좌석입니다.");
-            }
-
-            Seat updatedSeat = Seat.builder()
-                    .id(seat.getId())
-                    .horizon(seat.getHorizon())
-                    .vertical(seat.getVertical())
-                    .festival(festival)
-                    .team(team)
-                    .isBooked(true)
-                    .build();
-            seatRepository.save(updatedSeat);
+            Seat newSeat = Seat.createSeat(festival, team, coordinate.horizon(), coordinate.vertical());
+            newSeat.updateBooked(true);
+            seatRepository.save(newSeat);
         });
     }
 }
